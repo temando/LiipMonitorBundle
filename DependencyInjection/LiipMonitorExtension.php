@@ -25,6 +25,14 @@ class LiipMonitorExtension extends Extension
 
         if ($config['enable_controller']) {
             $loader->load('controller.xml');
+
+            $container->setParameter(
+                sprintf(
+                    '%s.health_controller.ko_status_code',
+                    $this->getAlias()
+                ),
+                $config['controller']['ko_status_code']
+            );
         }
 
         if ($config['mailer']['enabled']) {

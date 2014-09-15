@@ -219,6 +219,8 @@ To run this reporter with the REST API, add a `reporters` query parameter:
 ```yaml
 liip_monitor:
     enable_controller:    false
+    controller:
+        ko_http_status:   200
     mailer:
         enabled:          false
         recipient:        ~

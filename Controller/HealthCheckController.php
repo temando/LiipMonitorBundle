@@ -13,6 +13,7 @@ class HealthCheckController
 {
     protected $runner;
     protected $pathHelper;
+    protected $koStatusCode = 200;
 
     /**
      * @param Runner     $runner
@@ -22,6 +23,19 @@ class HealthCheckController
     {
         $this->runner = $runner;
         $this->pathHelper = $pathHelper;
+    }
+
+    /**
+     * Set the HTTP status code that will be returned if the global status of a runner is not OK.
+     *
+     * @param int $code A HTTP status code.
+     * @return $this
+     */
+    public function setKoStatusCode($code)
+    {
+        $this->koStatusCode = $code;
+
+        return $this;
     }
 
     /**
@@ -77,10 +91,13 @@ class HealthCheckController
     {
         $report = $this->runTests($request);
 
-        return new JsonResponse(array(
-            'checks' => $report->getResults(),
-            'globalStatus' => $report->getGlobalStatus()
-        ));
+        return new JsonResponse(
+            array(
+                'checks' => $report->getResults(),
+                'globalStatus' => $report->getGlobalStatus()
+            ),
+            $report->isOk() ? 200 : $this->koStatusCode
+        );
     }
 
     /**

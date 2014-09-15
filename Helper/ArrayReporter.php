@@ -38,6 +38,14 @@ class ArrayReporter implements ReporterInterface
     }
 
     /**
+     * @return bool
+     */
+    public function isOk()
+    {
+        return $this->getGlobalStatus() === ArrayReporter::STATUS_OK;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function onAfterRun(CheckInterface $check, ResultInterface $result, $checkAlias = null)

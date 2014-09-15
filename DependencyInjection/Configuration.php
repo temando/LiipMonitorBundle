@@ -28,6 +28,12 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->booleanNode('enable_controller')->defaultFalse()->end()
+                ->arrayNode('controller')
+                    ->canBeEnabled()
+                    ->children()
+                    ->scalarNode('ko_status_code')->defaultValue(200)->end()
+                    ->end()
+                ->end()
                 ->arrayNode('mailer')
                     ->canBeEnabled()
                     ->children()
