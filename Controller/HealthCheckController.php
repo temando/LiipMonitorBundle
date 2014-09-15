@@ -13,7 +13,7 @@ class HealthCheckController
 {
     protected $runner;
     protected $pathHelper;
-    protected $koStatusCode = 200;
+    protected $koHealthStatusCode = 200;
 
     /**
      * @param Runner     $runner
@@ -31,9 +31,9 @@ class HealthCheckController
      * @param int $code A HTTP status code.
      * @return $this
      */
-    public function setKoStatusCode($code)
+    public function setKoHealthStatusCode($code)
     {
-        $this->koStatusCode = $code;
+        $this->koHealthStatusCode = $code;
 
         return $this;
     }
@@ -95,8 +95,7 @@ class HealthCheckController
             array(
                 'checks' => $report->getResults(),
                 'globalStatus' => $report->getGlobalStatus()
-            ),
-            $report->isOk() ? 200 : $this->koStatusCode
+            )
         );
     }
 
@@ -110,6 +109,20 @@ class HealthCheckController
         $results = $this->runTests($request, $checkId)->getResults();
 
         return new JsonResponse($results[0]);
+    }
+
+    /**
+     * @param  Request                                    $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function healthCheckAction(Request $request)
+    {
+        $report = $this->runTests($request);
+
+        return new Response(
+            $report->getGlobalStatus(),
+            $report->isOk() ? 200 : $this->koHealthStatusCode
+        );
     }
 
     /**
