@@ -28,10 +28,10 @@ class LiipMonitorExtension extends Extension
 
             $container->setParameter(
                 sprintf(
-                    '%s.health_controller.ko_status_code',
+                    '%s.health_controller.ko_health_status_code',
                     $this->getAlias()
                 ),
-                $config['controller']['ko_status_code']
+                $config['controller']['ko_health_status_code']
             );
         }
 

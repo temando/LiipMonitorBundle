@@ -31,7 +31,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('controller')
                     ->canBeEnabled()
                     ->children()
-                    ->scalarNode('ko_status_code')->defaultValue(200)->end()
+                    ->scalarNode('ko_health_status_code')->defaultValue(200)->end()
                     ->end()
                 ->end()
                 ->arrayNode('mailer')

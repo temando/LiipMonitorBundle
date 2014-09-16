@@ -12,10 +12,10 @@
     <route id="liip_monitor_run_all_checks" pattern="/run">
         <default key="_controller">liip_monitor.health_controller:runAllChecksAction</default>
     </route>
-    <route id="liip_monitor_health_check" pattern="/health">
-        <default key="_controller">liip_monitor.health_controller:healthCheckAction</default>
-    </route>
     <route id="liip_monitor_run_single_check" pattern="/run/{checkId}">
         <default key="_controller">liip_monitor.health_controller:runSingleCheckAction</default>
+    </route>
+    <route id="liip_monitor_health_check" pattern="/health">
+        <default key="_controller">liip_monitor.health_controller:healthCheckAction</default>
     </route>
 </routes>
