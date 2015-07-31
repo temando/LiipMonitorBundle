@@ -44,7 +44,7 @@ Health.healthController = Em.ArrayProxy.create({
         var self = this;
         jQuery.ajax({
             url: api.liip_monitor_run_all_checks,
-            type: 'POST',
+            type: 'GET',
             dataType: 'json',
             success: function(data) {
                 var checks = data.checks.map(function(item) {
@@ -62,7 +62,7 @@ Health.healthController = Em.ArrayProxy.create({
         var self = this;
         $.ajax({
            url: check.get('runUrl'),
-           type: 'POST',
+           type: 'GET',
            dataType: 'json',
            success: function(data) {
                var updatedCheck = Health.Check.create(data);
